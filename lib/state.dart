@@ -1,0 +1,3 @@
+enum StateMenu{
+  menu,playing,
+}
