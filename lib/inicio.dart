@@ -36,20 +36,24 @@ class _route extends State<thirdRoute> {
     // TODO: implement build
     return Scaffold(
         body: new Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/virus1.png'),
+              fit: BoxFit.cover)),
       child: new Stack(
         children: <Widget>[
+
+          gameController.widget != null ? gameController.widget : Container(),
           Center(
             child: new Image(
-              width: MediaQuery.of(context).size.width / 3,
-              height: MediaQuery.of(context).size.height / 3,
+              width: 160,
+              height: 140,
               image: AssetImage('assets/images/casa.png'),
             ),
           ),
-          gameController.widget != null ? gameController.widget : Container(),
           new RawMaterialButton(
-
             onPressed: () {
-              gameController.pausado=true;
+              gameController.pausado = true;
               print('pause');
               showDialog(
                 context: context,
@@ -59,8 +63,13 @@ class _route extends State<thirdRoute> {
                           .copyWith(dialogBackgroundColor: Colors.black12),
                       child: new AlertDialog(
                         title: Center(
-                          child: Text("Pausa",
-                              style: TextStyle(color: Colors.purpleAccent,fontSize: 50.0,), ),
+                          child: Text(
+                            "Pausa",
+                            style: TextStyle(
+                              color: Colors.purpleAccent,
+                              fontSize: 50.0,
+                            ),
+                          ),
                         ),
                         content: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -74,15 +83,16 @@ class _route extends State<thirdRoute> {
                               child: new Text(
                                 "Continuar",
                                 style: new TextStyle(
-                                    fontSize: 30.0,
-                                    color: Colors.purpleAccent),
+                                    fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
-                                gameController.pausado=false;
+                                gameController.pausado = false;
                               },
                             ),
-                            SizedBox(height: 25,),
+                            SizedBox(
+                              height: 25,
+                            ),
                             OutlineButton(
                               splashColor: Colors.lightBlue,
                               shape: new RoundedRectangleBorder(
@@ -92,18 +102,16 @@ class _route extends State<thirdRoute> {
                               child: new Text(
                                 "Reiniciar",
                                 style: new TextStyle(
-                                    fontSize: 30.0,
-                                    color: Colors.purpleAccent),
+                                    fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
                                 Navigator.pop(context);
                                 gameController.restartGame();
-                                gameController.pausado=false;
+                                gameController.pausado = false;
                               },
                             ),
                             SizedBox(height: 25),
                             OutlineButton(
-
                               shape: new RoundedRectangleBorder(
                                   borderRadius:
                                       new BorderRadius.circular(30.0)),
@@ -111,12 +119,11 @@ class _route extends State<thirdRoute> {
                               child: new Text(
                                 "Menu Principal",
                                 style: new TextStyle(
-                                    fontSize: 30.0,
-                                    color: Colors.purpleAccent),
+                                    fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
                                 //TODO: Aqui hay un bug, no inicia nuevo juego, al volver al menu.
-                                gameController.nuevoJuego=false;
+                                gameController.nuevoJuego = false;
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                               },
@@ -129,9 +136,9 @@ class _route extends State<thirdRoute> {
             },
             elevation: 2.0,
             fillColor: Color(0xFF2E9AA6),
-            child: Icon(
-              Icons.pause,
-              size: 30.0,
+            child: new IconTheme(
+              data: new IconThemeData(color: Colors.white),
+              child: new Icon(Icons.pause),
             ),
             padding: EdgeInsets.all(12.0),
             shape: CircleBorder(),
