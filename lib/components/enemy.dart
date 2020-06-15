@@ -43,7 +43,7 @@ class Enemy{
     if(!isDead){
       double stepDistance = speed * t;
       Offset toPlayer = gameController.player.playerRect.center - enemyRect.center;
-      if(stepDistance <= toPlayer.distance - gameController.tilesSize * 1.25){
+      if(stepDistance <= toPlayer.distance - gameController.tilesSize * 1.5){
         Offset stepToPlayer = Offset.fromDirection(toPlayer.direction,stepDistance);
         enemyRect = enemyRect.shift(stepToPlayer);
       }else{
@@ -65,10 +65,11 @@ class Enemy{
       if(health<=0){
         isDead =true;
         gameController.score++;
+        gameController.puntos++;
         //print(gameController.score);
-        if(gameController.score>(gameController.storage.getInt('highstore')?? 0)){
-          gameController.storage.setInt('highscore', gameController.score);
-        }
+//        if(gameController.score>(gameController.storage.getInt('highstore')?? 0)){
+//          gameController.storage.setInt('highscore', gameController.score);
+//        }
       }
     }
   }

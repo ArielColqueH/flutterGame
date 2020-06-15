@@ -5,68 +5,143 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'game_controller.dart';
 import 'package:flutter/material.dart';
-//void iniciar() async{
-//  WidgetsFlutterBinding.ensureInitialized();
-//  Util flameUtil = Util();
-//  await flameUtil.fullScreen();
-//  await flameUtil.setOrientation(DeviceOrientation.portraitUp);
-//
-//  SharedPreferences storage = await SharedPreferences.getInstance();
-//  GameController gameController = GameController(storage);
-//
-//  runApp(gameController.widget);
-//
-//  TapGestureRecognizer tapper = TapGestureRecognizer();
-//  tapper.onTapDown = gameController.onTapDown;
-//  flameUtil.addGestureRecognizer(tapper);
-//}
 
-class thirdRoute extends StatefulWidget{
+class thirdRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return route();
+    return _route();
   }
-
 }
 
-class route extends State<thirdRoute>{
-  //LangawGame game;
+class _route extends State<thirdRoute> {
   @override
-  void iniciar()async{
+  GameController gameController;
+  void iniciar() async {
     WidgetsFlutterBinding.ensureInitialized();
     Util flameUtil = Util();
+
+    gameController = GameController();
+
     await flameUtil.fullScreen();
     await flameUtil.setOrientation(DeviceOrientation.portraitUp);
-
-    SharedPreferences storage = await SharedPreferences.getInstance();
-    GameController gameController = GameController(storage);
-
-    runApp(gameController.widget);
 
     TapGestureRecognizer tapper = TapGestureRecognizer();
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
-  }
-  void initState() {
-    iniciar();
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: Text("as"),
-    );
+        body: new Container(
+      child: new Stack(
+        children: <Widget>[
+          Center(
+            child: new Image(
+              width: MediaQuery.of(context).size.width / 3,
+              height: MediaQuery.of(context).size.height / 3,
+              image: AssetImage('assets/images/casa.png'),
+            ),
+          ),
+          gameController.widget != null ? gameController.widget : Container(),
+          new RawMaterialButton(
+
+            onPressed: () {
+              gameController.pausado=true;
+              print('pause');
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Theme(
+                      data: Theme.of(context)
+                          .copyWith(dialogBackgroundColor: Colors.black12),
+                      child: new AlertDialog(
+                        title: Center(
+                          child: Text("Pausa",
+                              style: TextStyle(color: Colors.purpleAccent,fontSize: 50.0,), ),
+                        ),
+                        content: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            OutlineButton(
+                              //splashColor: Colors.lightBlue,
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0)),
+                              color: Colors.transparent,
+                              child: new Text(
+                                "Continuar",
+                                style: new TextStyle(
+                                    fontSize: 30.0,
+                                    color: Colors.purpleAccent),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                gameController.pausado=false;
+                              },
+                            ),
+                            SizedBox(height: 25,),
+                            OutlineButton(
+                              splashColor: Colors.lightBlue,
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0)),
+                              color: Colors.transparent,
+                              child: new Text(
+                                "Reiniciar",
+                                style: new TextStyle(
+                                    fontSize: 30.0,
+                                    color: Colors.purpleAccent),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                gameController.restartGame();
+                                gameController.pausado=false;
+                              },
+                            ),
+                            SizedBox(height: 25),
+                            OutlineButton(
+
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(30.0)),
+                              color: Colors.transparent,
+                              child: new Text(
+                                "Menu Principal",
+                                style: new TextStyle(
+                                    fontSize: 30.0,
+                                    color: Colors.purpleAccent),
+                              ),
+                              onPressed: () {
+                                //TODO: Aqui hay un bug, no inicia nuevo juego, al volver al menu.
+                                gameController.nuevoJuego=false;
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      ));
+                },
+              );
+            },
+            elevation: 2.0,
+            fillColor: Color(0xFF2E9AA6),
+            child: Icon(
+              Icons.pause,
+              size: 30.0,
+            ),
+            padding: EdgeInsets.all(12.0),
+            shape: CircleBorder(),
+          ),
+        ],
+      ),
+    ));
   }
 
-//  @override
-//  Widget build(BuildContext context) {
-//
-//    // TODO: implement build
-//    Size ScreenSize=MediaQuery.of(context).size;
-//    return Scaffold(
-//
-//    );
-//  }
+  void initState() {
+    iniciar();
+  }
 }

@@ -15,8 +15,8 @@ class ScoreText{
     painter.paint(c, position);
   }
   void update(double t){
-    if((painter.text ?? '')!= gameController.score.toString()){
-      painter.text = TextSpan(text : gameController.score.toString(),
+    if((painter.text ?? '')!= gameController.puntos.toString()){
+      painter.text = TextSpan(text : gameController.puntos.toString(),
       style: TextStyle(color: Colors.white,fontSize: 70.0));
       painter.layout();
       position = Offset((gameController.screenSize.width/2) - (painter.width/2),(gameController.screenSize.height*0.2) - (painter.height*0.2));

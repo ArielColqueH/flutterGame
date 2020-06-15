@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1064298347195",
+    "firebase_url": "https://puntuaciones-93d82.firebaseio.com",
+    "project_id": "puntuaciones-93d82",
+    "storage_bucket": "puntuaciones-93d82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064298347195:android:415ab04a6d0fd08cc6c79e",
+        "android_client_info": {
+          "package_name": "com.example.flutterjuego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064298347195-si568qjt62iq9s9936h8ocplcf1k8rse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDN87tTaXejwgoOBmoTPSzgOeJNj_iyLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064298347195-si568qjt62iq9s9936h8ocplcf1k8rse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

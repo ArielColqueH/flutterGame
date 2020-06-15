@@ -1,5 +1,6 @@
 import 'package:flame/util.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 //import 'package:shared_preferences/shared_preferences.dart';
@@ -22,27 +23,38 @@ import 'package:flutter/services.dart';
 //  tapper.onTapDown = gameController.onTapDown;
 //  flameUtil.addGestureRecognizer(tapper);
 //}
-
+import 'package:flutterjuego/game_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterjuego/puntuaciones.dart';
 import 'package:flutterjuego/inicio.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+void main() {
+  runApp(
+      MaterialApp(
+          theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFF011526)),
+          home: MyApp()
+      )
+  );
+}
+
+class MyApp extends StatefulWidget{
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: new ThemeData(scaffoldBackgroundColor: const Color(0xFF011526)),
-        home: MyHome()
-    );
+  State<StatefulWidget> createState() {
+    return _MyApp();
   }
 }
 
-class MyHome extends StatelessWidget {
+class _MyApp extends State<MyApp> {
+  GameController gameController;
+  @override
+  void initState() {
+    super.initState();
+    gameController = GameController();
+  }
   @override
   Widget build(BuildContext context) {
-
       return Scaffold(
         body: new Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,11 +82,13 @@ class MyHome extends StatelessWidget {
                   "JUGAR",
                   style: new TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
-                onPressed: () {
-                  print('Puntuaciones clicked');
-                  Navigator.push(
+                onPressed: () async{
+                  print('ir a juego');
+                  gameController.nuevoJuego=true;
+
+                  await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => thirdRoute()),
+                    MaterialPageRoute(builder: (context) => thirdRoute())
                   );
                 },
               ),
@@ -95,7 +109,7 @@ class MyHome extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('Puntuaciones clicked');
-                  Navigator.push(
+                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SecondRoute()),
                   );
