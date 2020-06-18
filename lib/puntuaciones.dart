@@ -12,15 +12,15 @@ class _MySecondRoute extends State<SecondRoute> {
   final db = Firestore.instance;
   final _formKey = GlobalKey<FormState>();
 
-  createTodos() {
-    DocumentReference documentReference =
-        Firestore.instance.collection("PuntuacionesSurvival").document(input);
-
-    Map<String, String> todos = {"todoTitle": input};
-    documentReference.setData(todos).whenComplete(() {
-      print("$input created");
-    });
-  }
+//  createTodos() {
+//    DocumentReference documentReference =
+//        Firestore.instance.collection("PuntuacionesSurvival").document(input);
+//
+//    Map<String, String> todos = {"todoTitle": input};
+//    documentReference.setData(todos).whenComplete(() {
+//      print("$input created");
+//    });
+//  }
 
   void initState() {
     super.initState();
@@ -49,16 +49,16 @@ class _MySecondRoute extends State<SecondRoute> {
                       },
                     ),
                     actions: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          setState(() {
-                            createTodos();
-//                          todos.add(input);
-                          });
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("add"),
-                      )
+//                      FlatButton(
+//                        onPressed: () {
+//                          setState(() {
+//                            createTodos();
+////                          todos.add(input);
+//                          });
+//                          Navigator.of(context).pop();
+//                        },
+//                        child: Text("add"),
+//                      )
                     ],
                   );
                 });
@@ -81,7 +81,7 @@ class _MySecondRoute extends State<SecondRoute> {
             Expanded(
               child: StreamBuilder(
                   stream: Firestore.instance
-                      .collection("PuntuacionesSurvival")
+                      .collection("PuntuacionesSurvival").orderBy('puntuacion', descending: true)
                       .snapshots(),
                   builder: (context, snapshots) {
                     if (!snapshots.hasData) {
@@ -102,11 +102,17 @@ class _MySecondRoute extends State<SecondRoute> {
                             child: Card(
                                 color: Color(0xFF2E9AA6),
                                 child: ListTile(
+                                  leading: Icon(Icons.account_circle,size: 60,),
                                   title: Text(
-                                    documentSnapshot["todoTitle"],
+                                    documentSnapshot["nombre"],
                                     style: new TextStyle(color: Colors.white),
                                   ),
-                                )),
+                                  subtitle: Text(documentSnapshot["puntuacion"].toString()+" Puntos",
+                                    style: new TextStyle(color: Colors.white),
+                                  ),
+
+                                ),
+                            ),
                           );
                         });
                     ;

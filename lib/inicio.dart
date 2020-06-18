@@ -18,6 +18,7 @@ class _route extends State<thirdRoute> {
   @override
   GameController gameController;
   void iniciar() async {
+    print("entro a iniciar");
     WidgetsFlutterBinding.ensureInitialized();
     Util flameUtil = Util();
 
@@ -29,10 +30,7 @@ class _route extends State<thirdRoute> {
     TapGestureRecognizer tapper = TapGestureRecognizer();
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
-    print("gc:" + gameController.alertPuntuacion.toString());
-    if(gameController.alertPuntuacion==true){
-      showAlert(context);
-    }
+    //print("gc:" + gameController.alertPuntuacion.toString());
   }
 
   @override
@@ -49,8 +47,8 @@ class _route extends State<thirdRoute> {
           gameController.widget != null ? gameController.widget : Container(),
           Center(
             child: new Image(
-              width: 150,
-              height: 130,
+              width: 139,
+              height: 139,
               image: AssetImage('assets/images/casa.png'),
             ),
           ),
@@ -125,8 +123,7 @@ class _route extends State<thirdRoute> {
                                     fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
-                                //TODO: Aqui hay un bug, no inicia nuevo juego, al volver al menu.
-                                gameController.nuevoJuego = false;
+                                gameController.pausado = true;
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                               },
@@ -149,16 +146,6 @@ class _route extends State<thirdRoute> {
         ],
       ),
     ));
-  }
-
-  void showAlert(BuildContext context) {
-    if (gameController.alertPuntuacion == true) {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                content: Text("hi"),
-              ));
-    }
   }
 
   void initState() {

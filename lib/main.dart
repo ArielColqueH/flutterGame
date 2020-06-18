@@ -84,8 +84,7 @@ class _MyApp extends State<MyApp> {
                 ),
                 onPressed: () async{
                   print('ir a juego');
-                  gameController.nuevoJuego=true;
-
+                  gameController.restartGame();
                   await Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => thirdRoute())

@@ -13,12 +13,17 @@ import 'package:flutterjuego/components/menu_principal_text.dart';
 import 'package:flutterjuego/state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/enemy.dart';
+import 'components/level.dart';
 import 'components/score_text.dart';
+import 'components/vida_text.dart';
 import 'enemy_spawner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GameController extends Game{
 //  final SharedPreferences storage;
+  int maxSpwInt;
+  int minSpqInt;
+  int nivelJuego;
   String nombreUsuario;
   bool alertPuntuacion = false;
   bool pausado=false;
@@ -32,13 +37,15 @@ class GameController extends Game{
   EnemySpawner enemySpawner;
   int score;
   ScoreText scoreText;
+  Level nivel ;
   StateMenu state ;
   HighScoreText highScoreText;
   StartText startText;
   MenuPrincipalText menuPrincipalText;
   int puntos;
+  String porcentajeVida;
   BuildContext x;
-//  Sprite playerFrame= Sprite('casa.png');
+  VidaText vidaText;
 
   GameController(context){
     initialize();
@@ -55,18 +62,19 @@ class GameController extends Game{
     healhtBar = HealhtBar(this);
     score = 0;
     scoreText = ScoreText(this);
+    nivel=Level(this);
     highScoreText = HighScoreText(this);
     startText = StartText(this);
     menuPrincipalText = MenuPrincipalText(this);
     puntos =0;
+    nivelJuego = 1;
+    porcentajeVida=100.toString();
+    //porcentajeVida=player.currentHealth as double;
     pausado=false;
+    vidaText =VidaText(this);
     //alertPuntuacion=false;
-    print("alerta init: "+alertPuntuacion.toString());
   }
 
-//  void renderAlert ()async{
-//    await alertPuntuacion;
-//  }
   void render(Canvas c){
 //    if(pausado!=true){
       Rect background = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
@@ -75,7 +83,9 @@ class GameController extends Game{
       player.render(c);
       enemies.forEach((Enemy enemy)=>enemy.render(c));
       scoreText.render(c);
+      nivel.render(c);
       healhtBar.render(c);
+      vidaText.render(c);
 //    }
   }
 
@@ -85,23 +95,27 @@ class GameController extends Game{
         enemies.forEach((Enemy enemy)=>enemy.update(t));
         enemies.removeWhere((Enemy enemy)=> enemy.isDead);
         player.update(t);
+        vidaText.update(t);
         healhtBar.update(t);
         scoreText.update(t);
-        print("alerta update :"+alertPuntuacion.toString());
+        nivel.update(t);
+        //print("alerta update :"+alertPuntuacion.toString());
         if(alertPuntuacion==true){
           showAlert(x);
         }
     }
   }
+
   void resize(Size size){
     screenSize=size;
     tilesSize = screenSize.width/10;
   }
 
   void onTapDown(TapDownDetails d){
-    print(d.globalPosition);
+    print("posicion"+d.globalPosition.toString());
       enemies.forEach((Enemy enemy){
         if(enemy.enemyRect.contains(d.globalPosition)){
+          print("le diste");
           enemy.onTapDown();
         }
       });
@@ -136,6 +150,7 @@ class GameController extends Game{
     enemies.clear();
     player.currentHealth = player.maxHealt;
     player.isDead =false;
+    initialize();
   }
 
   void showAlert(BuildContext context) {
@@ -154,6 +169,7 @@ class GameController extends Game{
               FlatButton(
                 onPressed: () {
                   print(nombreUsuario);
+                  print("puntuacion final : "+puntos.toString());
 //                  setState(() {
                     createTodos();
 //                  });
@@ -168,9 +184,10 @@ class GameController extends Game{
   }
 
   createTodos() {
+    //final _formKey =GlobalKey<FormState>();
     DocumentReference documentReference =
     Firestore.instance.collection("PuntuacionesSurvival").document(nombreUsuario);
-    Map<String, String> todos = {"todoTitle": nombreUsuario};
+    Map<String, dynamic> todos = {"nombre": nombreUsuario , "puntuacion" : puntos};
     documentReference.setData(todos).whenComplete(() {
       print("$nombreUsuario created");
     });

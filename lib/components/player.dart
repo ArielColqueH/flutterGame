@@ -38,10 +38,10 @@ class Player extends CustomPaint{
     if(currentHealth<=0){
       gameController.alertPuntuacion=true;
       gameController.pausado=true;
-
       //gameFinished=true;
       print("vida == 0");
       print("alert == true");
+
     }
   }
 }

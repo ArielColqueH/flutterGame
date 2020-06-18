@@ -24,16 +24,19 @@ class Enemy{
     Color color ;
     switch(health){
       case 1:
+        //print("1");
         color = Color(0xFF7DCFD7);
         break;
       case 2:
+        //print("2");
         color = Color(0xFF2E9CA6);
         break;
       case 3:
+        //print("3");
         color = Color(0xFF056e78);
         break;
       default:
-        color = Color(0xFF056e78);
+        color = Color(0x00056e78);
         break;
     }
     Paint enemyColor = Paint()..color = color;
@@ -55,6 +58,15 @@ class Enemy{
   void attack(){
     if(!gameController.player.isDead){
       gameController.player.currentHealth -=damage;
+      double porcVida =(gameController.player.currentHealth/300)*100;
+      if(porcVida>0) {
+        gameController.porcentajeVida =
+            ((gameController.player.currentHealth / 300) * 100).toStringAsFixed(
+                0);
+      }else{
+        gameController.porcentajeVida=0.toString();
+        print("vida menor a 0");
+      }
     }
   }
   void onTapDown(){
@@ -72,16 +84,5 @@ class Enemy{
     }
   }
 
-  Path getTrianglePath(double x, double y,double ejex , double ejey) {
-    return Path()
-//      ..moveTo(0, y)
-//      ..lineTo(x / 2, 0)
-//      ..lineTo(x, y)
-//      ..lineTo(0, y);
-    ..moveTo(ejex, ejey)
-    ..lineTo(ejex+(x / 2), ejey-y)
-    ..lineTo(x+ejex, ejey)
-    ..lineTo(ejex+(x / 2), ejey);
-  }
 
 }
