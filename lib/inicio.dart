@@ -21,7 +21,7 @@ class _route extends State<thirdRoute> {
     WidgetsFlutterBinding.ensureInitialized();
     Util flameUtil = Util();
 
-    gameController = GameController();
+    gameController = GameController(context);
 
     await flameUtil.fullScreen();
     await flameUtil.setOrientation(DeviceOrientation.portraitUp);
@@ -29,6 +29,10 @@ class _route extends State<thirdRoute> {
     TapGestureRecognizer tapper = TapGestureRecognizer();
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
+    print("gc:" + gameController.alertPuntuacion.toString());
+    if(gameController.alertPuntuacion==true){
+      showAlert(context);
+    }
   }
 
   @override
@@ -42,12 +46,11 @@ class _route extends State<thirdRoute> {
               fit: BoxFit.cover)),
       child: new Stack(
         children: <Widget>[
-
           gameController.widget != null ? gameController.widget : Container(),
           Center(
             child: new Image(
-              width: 160,
-              height: 140,
+              width: 150,
+              height: 130,
               image: AssetImage('assets/images/casa.png'),
             ),
           ),
@@ -146,6 +149,16 @@ class _route extends State<thirdRoute> {
         ],
       ),
     ));
+  }
+
+  void showAlert(BuildContext context) {
+    if (gameController.alertPuntuacion == true) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                content: Text("hi"),
+              ));
+    }
   }
 
   void initState() {

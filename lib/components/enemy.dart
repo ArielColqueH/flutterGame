@@ -50,8 +50,6 @@ class Enemy{
         attack();
       }
     }
-
-
   }
 
   void attack(){

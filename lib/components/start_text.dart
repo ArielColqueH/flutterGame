@@ -15,11 +15,9 @@ class StartText{
     painter.paint(c, position);
   }
   void update(double t){
-
     painter.text = TextSpan(text:'Empezar',
         style: TextStyle(color: Colors.white,fontSize: 30.0));
     painter.layout();
     position = Offset((gameController.screenSize.width/2) - (painter.width/2),(gameController.screenSize.height*0.7) - (painter.height/2));
-
   }
 }

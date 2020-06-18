@@ -51,7 +51,7 @@ class _MyApp extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    gameController = GameController();
+    gameController = GameController(context);
   }
   @override
   Widget build(BuildContext context) {
