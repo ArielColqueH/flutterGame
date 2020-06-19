@@ -17,23 +17,62 @@ class Enemy{
     damage = 1 ;
     speed = gameController.tilesSize*2;
     enemyRect = Rect.fromLTWH(x, y, gameController.tilesSize*1.2, gameController.tilesSize*1.2);
-    //figura = getTrianglePath(size, size, gameController.screenSize.width/2 - size/2,gameController.screenSize.height/2 - size/2);
   }
 
   void render(Canvas c){
     Color color ;
     switch(health){
       case 1:
-        //print("1");
-        color = Color(0xFF7DCFD7);
+        switch(gameController.nivelJuego){
+          case 1:
+            color = Color(0xFF7DCFD7);
+            break;
+          case 2:
+            color = Color(0xFFef6459);
+            break;
+          case 3:
+            color = Color(0xFF999999);
+            break;
+          default:
+            color = Color(0x00ffffff);
+            break;
+        }
+        //color = Color(0xFF7DCFD7);
         break;
       case 2:
         //print("2");
-        color = Color(0xFF2E9CA6);
+        switch(gameController.nivelJuego){
+          case 1:
+            color = Color(0xFF2E9CA6);
+            break;
+          case 2:
+            color = Color(0xFFeb3d30);
+            break;
+          case 3:
+            color = Color(0xFF666666);
+            break;
+          default:
+            color = Color(0x00ffffff);
+            break;
+        }
         break;
       case 3:
         //print("3");
-        color = Color(0xFF056e78);
+        color = Color(0x00ffffff);
+        switch(gameController.nivelJuego){
+          case 1:
+            color = Color(0xFF056e78);
+            break;
+          case 2:
+            color = Color(0xFFa52b22);
+            break;
+          case 3:
+            color = Color(0xFF333333);
+            break;
+          default:
+            color = Color(0x00ffffff);
+            break;
+        }
         break;
       default:
         color = Color(0x00056e78);
@@ -76,10 +115,6 @@ class Enemy{
         isDead =true;
         gameController.score++;
         gameController.puntos++;
-        //print(gameController.score);
-//        if(gameController.score>(gameController.storage.getInt('highstore')?? 0)){
-//          gameController.storage.setInt('highscore', gameController.score);
-//        }
       }
     }
   }

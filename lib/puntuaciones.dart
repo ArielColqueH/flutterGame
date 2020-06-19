@@ -32,40 +32,40 @@ class _MySecondRoute extends State<SecondRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-
-          backgroundColor: Color(0xFFBF7EBB),
-          onPressed: () {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    title: Text("add todo list"),
-                    content: TextField(
-                      onChanged: (String value) {
-                        input = value;
-                      },
-                    ),
-                    actions: <Widget>[
-//                      FlatButton(
-//                        onPressed: () {
-//                          setState(() {
-//                            createTodos();
-////                          todos.add(input);
-//                          });
-//                          Navigator.of(context).pop();
-//                        },
-//                        child: Text("add"),
-//                      )
-                    ],
-                  );
-                });
-          },
-          //icon: Icon(Icons.add),
-
-        ),
+//        floatingActionButton: FloatingActionButton(
+//
+//          backgroundColor: Color(0xFFBF7EBB),
+//          onPressed: () {
+//            showDialog(
+//                context: context,
+//                builder: (BuildContext context) {
+//                  return AlertDialog(
+//                    shape: RoundedRectangleBorder(
+//                        borderRadius: BorderRadius.circular(8)),
+//                    title: Text("add todo list"),
+//                    content: TextField(
+//                      onChanged: (String value) {
+//                        input = value;
+//                      },
+//                    ),
+//                    actions: <Widget>[
+////                      FlatButton(
+////                        onPressed: () {
+////                          setState(() {
+////                            createTodos();
+//////                          todos.add(input);
+////                          });
+////                          Navigator.of(context).pop();
+////                        },
+////                        child: Text("add"),
+////                      )
+//                    ],
+//                  );
+//                });
+//          },
+//          //icon: Icon(Icons.add),
+//
+//        ),
         body: Column(
           children: <Widget>[
             SizedBox(height: 50),

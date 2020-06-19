@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'game_controller.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:async';
 class thirdRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -15,6 +15,10 @@ class thirdRoute extends StatefulWidget {
 }
 
 class _route extends State<thirdRoute> {
+  int maxNiveles =3;
+  Timer _timer;
+  int segloop=7;
+  int _start = 7;
   @override
   GameController gameController;
   void iniciar() async {
@@ -30,7 +34,7 @@ class _route extends State<thirdRoute> {
     TapGestureRecognizer tapper = TapGestureRecognizer();
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
-    //print("gc:" + gameController.alertPuntuacion.toString());
+    startTimer();
   }
 
   @override
@@ -106,9 +110,14 @@ class _route extends State<thirdRoute> {
                                     fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
+                                print("nivel juego :"+gameController.nivelJuego.toString());
                                 Navigator.pop(context);
                                 gameController.restartGame();
                                 gameController.pausado = false;
+                                startTimer();
+                                gameController.nivelJuego=1;
+                                print("nivel juego :"+gameController.nivelJuego.toString());
+                                //gameController.nivelJuego=1;
                               },
                             ),
                             SizedBox(height: 25),
@@ -151,4 +160,35 @@ class _route extends State<thirdRoute> {
   void initState() {
     iniciar();
   }
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+          (Timer timer) => setState(
+            () {
+          if (_start < 1) {
+              print("pasaron 7 segundos");
+              gameController.nivelJuego++;
+              if(gameController.nivelJuego==4){
+                timer.cancel();
+                //gameController.pausado = true;
+              }else{
+                _start=segloop;
+              }
+
+
+          } else {
+            _start = _start - 1;
+          }
+        },
+      ),
+    );
+  }
+
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
 }

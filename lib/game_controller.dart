@@ -18,9 +18,11 @@ import 'components/score_text.dart';
 import 'components/vida_text.dart';
 import 'enemy_spawner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'dart:async';
 class GameController extends Game{
-//  final SharedPreferences storage;
+
+  Timer _timer;
+  int _start = 10;
   int maxSpwInt;
   int minSpqInt;
   int nivelJuego;
@@ -46,6 +48,7 @@ class GameController extends Game{
   String porcentajeVida;
   BuildContext x;
   VidaText vidaText;
+  bool juegoTerminado;
 
   GameController(context){
     initialize();
@@ -69,14 +72,12 @@ class GameController extends Game{
     puntos =0;
     nivelJuego = 1;
     porcentajeVida=100.toString();
-    //porcentajeVida=player.currentHealth as double;
     pausado=false;
     vidaText =VidaText(this);
-    //alertPuntuacion=false;
+    juegoTerminado=false;
   }
 
   void render(Canvas c){
-//    if(pausado!=true){
       Rect background = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
       Paint backgroundPaint= Paint()..color=Color(0xFF011526);
       c.drawRect(background, backgroundPaint);
@@ -86,7 +87,6 @@ class GameController extends Game{
       nivel.render(c);
       healhtBar.render(c);
       vidaText.render(c);
-//    }
   }
 
   void update(double t){
@@ -99,11 +99,20 @@ class GameController extends Game{
         healhtBar.update(t);
         scoreText.update(t);
         nivel.update(t);
-        //print("alerta update :"+alertPuntuacion.toString());
+
         if(alertPuntuacion==true){
+          print("vida terminada");
           showAlert(x);
         }
+        print("nivel juego : "+nivelJuego.toString());
+        if(nivelJuego==4){
+          pausado=true;
+          print("juego terminado");
+          showAlert(x);
+        }
+
     }
+
   }
 
   void resize(Size size){
@@ -192,5 +201,7 @@ class GameController extends Game{
       print("$nombreUsuario created");
     });
   }
+
+
 
 }

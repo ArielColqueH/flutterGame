@@ -15,9 +15,6 @@ class HighScoreText{
     painter.paint(c, position);
   }
   void update(double t){
-    //int highScore = gameController.storage.getInt('Puntuacion') ?? 0;
-      //painter.text = TextSpan(text:'Highscore $highScore',
-     //     style: TextStyle(color: Colors.white,fontSize: 40.0));
       painter.layout();
       position = Offset((gameController.screenSize.width/2) - (painter.width/2),(gameController.screenSize.height*0.2) - (painter.height/2));
   }
