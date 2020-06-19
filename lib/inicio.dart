@@ -17,8 +17,8 @@ class thirdRoute extends StatefulWidget {
 class _route extends State<thirdRoute> {
   int maxNiveles =3;
   Timer _timer;
-  int segloop=7;
-  int _start = 7;
+  int segloop=20;
+  int _start = 20;
   @override
   GameController gameController;
   void iniciar() async {
@@ -115,7 +115,8 @@ class _route extends State<thirdRoute> {
                                 gameController.restartGame();
                                 gameController.pausado = false;
                                 startTimer();
-                                gameController.nivelJuego=1;
+                                _start=segloop;
+
                                 print("nivel juego :"+gameController.nivelJuego.toString());
                                 //gameController.nivelJuego=1;
                               },
@@ -168,7 +169,7 @@ class _route extends State<thirdRoute> {
           (Timer timer) => setState(
             () {
           if (_start < 1) {
-              print("pasaron 7 segundos");
+              print("pasaron "+segloop.toString()+" segundos");
               gameController.nivelJuego++;
               if(gameController.nivelJuego==4){
                 timer.cancel();
@@ -176,8 +177,6 @@ class _route extends State<thirdRoute> {
               }else{
                 _start=segloop;
               }
-
-
           } else {
             _start = _start - 1;
           }

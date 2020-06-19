@@ -12,15 +12,6 @@ class _MySecondRoute extends State<SecondRoute> {
   final db = Firestore.instance;
   final _formKey = GlobalKey<FormState>();
 
-//  createTodos() {
-//    DocumentReference documentReference =
-//        Firestore.instance.collection("PuntuacionesSurvival").document(input);
-//
-//    Map<String, String> todos = {"todoTitle": input};
-//    documentReference.setData(todos).whenComplete(() {
-//      print("$input created");
-//    });
-//  }
 
   void initState() {
     super.initState();
@@ -32,40 +23,6 @@ class _MySecondRoute extends State<SecondRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//        floatingActionButton: FloatingActionButton(
-//
-//          backgroundColor: Color(0xFFBF7EBB),
-//          onPressed: () {
-//            showDialog(
-//                context: context,
-//                builder: (BuildContext context) {
-//                  return AlertDialog(
-//                    shape: RoundedRectangleBorder(
-//                        borderRadius: BorderRadius.circular(8)),
-//                    title: Text("add todo list"),
-//                    content: TextField(
-//                      onChanged: (String value) {
-//                        input = value;
-//                      },
-//                    ),
-//                    actions: <Widget>[
-////                      FlatButton(
-////                        onPressed: () {
-////                          setState(() {
-////                            createTodos();
-//////                          todos.add(input);
-////                          });
-////                          Navigator.of(context).pop();
-////                        },
-////                        child: Text("add"),
-////                      )
-//                    ],
-//                  );
-//                });
-//          },
-//          //icon: Icon(Icons.add),
-//
-//        ),
         body: Column(
           children: <Widget>[
             SizedBox(height: 50),
@@ -102,7 +59,7 @@ class _MySecondRoute extends State<SecondRoute> {
                             child: Card(
                                 color: Color(0xFF2E9AA6),
                                 child: ListTile(
-                                  leading: Icon(Icons.account_circle,size: 60,),
+                                  leading: Icon(Icons.account_circle,size: 60,color: Color(0xFFFFFFFF),),
                                   title: Text(
                                     documentSnapshot["nombre"],
                                     style: new TextStyle(color: Colors.white),

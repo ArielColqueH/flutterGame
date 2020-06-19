@@ -110,9 +110,7 @@ class GameController extends Game{
           print("juego terminado");
           showAlert(x);
         }
-
     }
-
   }
 
   void resize(Size size){
