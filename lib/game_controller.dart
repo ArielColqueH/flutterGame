@@ -2,16 +2,11 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/sprite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterjuego/components/health_bar.dart';
-import 'package:flutterjuego/components/highscore_text.dart';
 import 'package:flutterjuego/components/player.dart';
-import 'package:flutterjuego/components/start_text.dart';
-import 'package:flutterjuego/components/menu_principal_text.dart';
 import 'package:flutterjuego/state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'components/enemy.dart';
 import 'components/level.dart';
 import 'components/score_text.dart';
@@ -41,9 +36,6 @@ class GameController extends Game {
   ScoreText scoreText;
   Level nivel;
   StateMenu state;
-  HighScoreText highScoreText;
-  StartText startText;
-  MenuPrincipalText menuPrincipalText;
   int puntos;
   String porcentajeVida;
   BuildContext x;
@@ -67,9 +59,6 @@ class GameController extends Game {
     score = 0;
     scoreText = ScoreText(this);
     nivel = Level(this);
-    highScoreText = HighScoreText(this);
-    startText = StartText(this);
-    menuPrincipalText = MenuPrincipalText(this);
     puntos = 0;
     nivelJuego = 1;
     porcentajeVida = 100.toString();
@@ -77,6 +66,7 @@ class GameController extends Game {
     vidaText = VidaText(this);
     juegoTerminado = false;
     indexImage = 0;
+    tilesSize=0;
   }
 
   void render(Canvas c) {
@@ -140,6 +130,7 @@ class GameController extends Game {
 
   void resize(Size size) {
     screenSize = size;
+    print("screenSize:"+screenSize.toString());
     tilesSize = screenSize.width / 10;
   }
 

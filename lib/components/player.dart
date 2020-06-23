@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:flame/sprite.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterjuego/game_controller.dart';
-
+//clase de jugador
 class Player extends CustomPaint{
   final GameController gameController;
   int maxHealt;
@@ -14,34 +13,27 @@ class Player extends CustomPaint{
   Path figura;
   bool gameFinished =false;
 
-  Sprite playerFrame= Sprite('casa1.png');
-
+//constructor de jugador
   Player(this.gameController){
-    maxHealt=currentHealth=300;
-    final size = gameController.tilesSize * 1.5;
+    maxHealt=currentHealth=300;//maxima vida
+    final size = gameController.tilesSize * 1.5;//tamanio del jugador (cuadrado)
     playerRect = Rect.fromLTWH(gameController.screenSize.width/2 - size/2, gameController.screenSize.height/2 - size/2, size, size);
-    //playerRect = Rect.fromCircle(aux, size);
-    //figura = getTrianglePath(size, size, gameController.screenSize.width/2 - size/2,gameController.screenSize.height/2 - size/2);
   }
   void render(Canvas c){
-    Paint color = Paint()..color=Color(0x00BF7EBB);
-    c.drawRect(playerRect, color);
-    final size =gameController.tilesSize *4;
+    Paint color = Paint()..color=Color(0x00BF7EBB);//color invisible para poder poner sobre este la imagen
+    c.drawRect(playerRect, color);//creacion de color
+//    final size =gameController.tilesSize *4;
   }
-
+//actualizar el jugador
   void update(double t){
-    //print("current life = "+currentHealth.toString());
     if(!isDead && currentHealth<0){
       isDead=true;
-      //gameController.initialize();
     }
     if(currentHealth<=0){
-      gameController.alertPuntuacion=true;
-      gameController.pausado=true;
-      //gameFinished=true;
-      print("vida == 0");
-      print("alert == true");
-
+      gameController.alertPuntuacion=true;//cuando la vida sea 0 , entonces se la lanza un trigger para que un alert se pueda activar
+      gameController.pausado=true; // bandera para pausar el juego
+//      print("vida == 0");
+//      print("alert == true");
     }
   }
 }

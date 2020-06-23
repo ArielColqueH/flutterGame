@@ -1,3 +1,4 @@
+import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -24,20 +25,15 @@ class _route extends State<thirdRoute> {
   @override
   GameController gameController;
   void iniciar() async {
-    print("entro a iniciar");
     WidgetsFlutterBinding.ensureInitialized();
     Util flameUtil = Util();
-
     gameController = GameController(context);
-
-    await flameUtil.fullScreen();
+    await Flame.util.fullScreen();
     await flameUtil.setOrientation(DeviceOrientation.portraitUp);
-
     TapGestureRecognizer tapper = TapGestureRecognizer();
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
     startTimer();
-    //indexImageVariable=gameController.indexImage;
   }
 
   @override
@@ -58,7 +54,7 @@ class _route extends State<thirdRoute> {
           new RawMaterialButton(
             onPressed: () {
               gameController.pausado = true;
-              print('pause');
+//              print('pause');
               showDialog(
                 context: context,
                 builder: (context) {
@@ -109,15 +105,11 @@ class _route extends State<thirdRoute> {
                                     fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
-                                print("nivel juego :"+gameController.nivelJuego.toString());
                                 Navigator.pop(context);
                                 gameController.restartGame();
                                 gameController.pausado = false;
-                                startTimer();
                                 _start=segloop;
-
-                                print("nivel juego :"+gameController.nivelJuego.toString());
-                                //gameController.nivelJuego=1;
+                                startTimer();
                               },
                             ),
                             SizedBox(height: 25),
@@ -132,7 +124,7 @@ class _route extends State<thirdRoute> {
                                     fontSize: 30.0, color: Colors.purpleAccent),
                               ),
                               onPressed: () {
-                                gameController.pausado = true;
+                                //gameController.pausado = false;
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                               },
@@ -162,6 +154,7 @@ class _route extends State<thirdRoute> {
   }
 
   void startTimer() {
+    print("start :"+_start.toString());
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
       oneSec,

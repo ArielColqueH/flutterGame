@@ -62,10 +62,11 @@ class _MyApp extends State<MyApp> {
                   "JUGAR",
                   style: new TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
-                onPressed: () async{
-                  print('ir a juego');
+                onPressed: (){
+//                  print('ir a juego');
                   gameController.restartGame();
-                  await Navigator.push(
+                  gameController.pausado = false;
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => thirdRoute())
                   );
@@ -87,7 +88,6 @@ class _MyApp extends State<MyApp> {
                   style: new TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
                 onPressed: () {
-                  print('Puntuaciones clicked');
                    Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SecondRoute()),
