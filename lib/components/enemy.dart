@@ -86,6 +86,7 @@ class Enemy{
       double stepDistance = speed * t;
       Offset toPlayer = gameController.player.playerRect.center - enemyRect.center;
       if(stepDistance <= toPlayer.distance - gameController.tilesSize * 1.5){
+        //direccion al centro
         Offset stepToPlayer = Offset.fromDirection(toPlayer.direction,stepDistance);
         enemyRect = enemyRect.shift(stepToPlayer);
       }else{

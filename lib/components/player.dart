@@ -14,7 +14,7 @@ class Player extends CustomPaint{
   Path figura;
   bool gameFinished =false;
 
-  Sprite playerFrame= Sprite('casa.png');
+  Sprite playerFrame= Sprite('casa1.png');
 
   Player(this.gameController){
     maxHealt=currentHealth=300;
@@ -24,7 +24,7 @@ class Player extends CustomPaint{
     //figura = getTrianglePath(size, size, gameController.screenSize.width/2 - size/2,gameController.screenSize.height/2 - size/2);
   }
   void render(Canvas c){
-    Paint color = Paint()..color=Color(0xFFBF7EBB);
+    Paint color = Paint()..color=Color(0x00BF7EBB);
     c.drawRect(playerRect, color);
     final size =gameController.tilesSize *4;
   }

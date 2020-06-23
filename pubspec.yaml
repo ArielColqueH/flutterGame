@@ -51,7 +51,11 @@ flutter:
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
   assets:
-    - assets/images/casa.png
+    - assets/images/casa1.png
+    - assets/images/casa2.png
+    - assets/images/casa3.png
+    - assets/images/casa4.png
+    - assets/images/casa5.png
     - assets/images/virus1.png
 
 

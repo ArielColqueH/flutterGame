@@ -42,10 +42,6 @@ class _route extends State<thirdRoute> {
     // TODO: implement build
     return Scaffold(
         body: new Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/virus1.png'),
-              fit: BoxFit.cover)),
       child: new Stack(
         children: <Widget>[
           gameController.widget != null ? gameController.widget : Container(),
@@ -53,7 +49,7 @@ class _route extends State<thirdRoute> {
             child: new Image(
               width: 139,
               height: 139,
-              image: AssetImage('assets/images/casa.png'),
+              image: AssetImage('assets/images/casa5.png'),
             ),
           ),
           new RawMaterialButton(
