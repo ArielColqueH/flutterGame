@@ -19,6 +19,8 @@ class _route extends State<thirdRoute> {
   Timer _timer;
   int segloop=20;
   int _start = 20;
+  List<String> a = ["casa1", "casa2", "casa3", "casa4", "casa5"];
+  int indexImageVariable=0;
   @override
   GameController gameController;
   void iniciar() async {
@@ -35,6 +37,7 @@ class _route extends State<thirdRoute> {
     tapper.onTapDown = gameController.onTapDown;
     flameUtil.addGestureRecognizer(tapper);
     startTimer();
+    //indexImageVariable=gameController.indexImage;
   }
 
   @override
@@ -49,7 +52,7 @@ class _route extends State<thirdRoute> {
             child: new Image(
               width: 139,
               height: 139,
-              image: AssetImage('assets/images/casa5.png'),
+              image: AssetImage('assets/images/'+a[gameController.indexImage]+".png"),
             ),
           ),
           new RawMaterialButton(
