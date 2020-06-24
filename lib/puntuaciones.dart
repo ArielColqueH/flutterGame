@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import './models/jugador.dart';
+import './puntuacionesBloc.dart';
+
 class SecondRoute extends StatefulWidget {
   @override
   _MySecondRoute createState() => _MySecondRoute();
 }
+
 class _MySecondRoute extends State<SecondRoute> {
   //variables de inicializacion para mostrar el arreglo de jugadores
+  final puntuacionesBloc _puntuacionesBloc = puntuacionesBloc();
   List todos = List();
-  String input = "";
   final db = Firestore.instance;
 
   void initState() {
     super.initState();
   }
+
+  void dispose() {
+    super.dispose();
+    _puntuacionesBloc.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: <Widget>[
-          SizedBox(height: 50),
-            Text(
-              "SURVIVAL",
-              style: new TextStyle(fontSize: 50.0, color: Colors.white),
-            ),
-          new Text(
-            "Top Puntuaciones",
-            style: new TextStyle(fontSize: 20.0, color: Colors.white),
-          ),
+        SizedBox(height: 50),
+        Text(
+          "SURVIVAL",
+          style: new TextStyle(fontSize: 50.0, color: Colors.white),
+        ),
+        new Text(
+          "Top Puntuaciones",
+          style: new TextStyle(fontSize: 20.0, color: Colors.white),
+        ),
         SizedBox(height: 30),
+        //EJEMPLO DE TABLA UTILIZANDO FIREBASE DIRECTAMENTE
         Expanded(
           child: StreamBuilder(
               stream: Firestore.instance
@@ -44,8 +55,6 @@ class _MySecondRoute extends State<SecondRoute> {
                     shrinkWrap: true,
                     itemCount: snapshots.data.documents.length,
                     itemBuilder: (context, index) {
-//                          if (snapshots.data == null)
-//                            return CircularProgressIndicator();
                       DocumentSnapshot documentSnapshot =
                           snapshots.data.documents[index];
                       return Dismissible(
@@ -73,6 +82,45 @@ class _MySecondRoute extends State<SecondRoute> {
                     });
               }),
         ),
+//        EJEMPLO DE TABLA UTILIZANDO BLOCK
+//        Expanded(
+//          child: StreamBuilder<List<Jugador>>(
+//              stream: _puntuacionesBloc.jugadorListStream,
+//              builder: (context, snapshots) {
+//                if (!snapshots.hasData) {
+//                  return Text(
+//                    'No Data...',
+//                  );
+//                }
+//                return ListView.builder(
+//                    shrinkWrap: true,
+//                    itemCount: snapshots.data.length,
+//                    itemBuilder: (context, index) {
+//                      return Dismissible(
+//                        key: Key(index.toString()),
+//                        child: Card(
+//                          color: Color(0xFF2E9AA6),
+//                          child: ListTile(
+//                            leading: Icon(
+//                              Icons.account_circle,
+//                              size: 60,
+//                              color: Color(0xFFFFFFFF),
+//                            ),
+//                            title: Text(
+//                              snapshots.data[index].nombre,
+//                              style: new TextStyle(color: Colors.white),
+//                            ),
+//                            subtitle: Text(
+//                              snapshots.data[index].score.toString() +
+//                                  " Puntos",
+//                              style: new TextStyle(color: Colors.white),
+//                            ),
+//                          ),
+//                        ),
+//                      );
+//                    });
+//              }),
+//        ),
         SizedBox(height: 50),
         //boton para regresar a la pantalla pricipal
         ButtonTheme(

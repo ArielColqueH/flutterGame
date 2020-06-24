@@ -183,7 +183,6 @@ class GameController extends Game {
     initialize();
   }
 
-
   //widget de dialogo que se muestra al acabar el juego
   void showAlert(BuildContext context) {
     showDialog(

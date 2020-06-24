@@ -97,6 +97,26 @@ class _MyApp extends State<MyApp> {
                 },
               ),
             ),
+            SizedBox(height: 30),
+            //boton de puntuaciones
+            ButtonTheme(
+              minWidth: 240.0,
+              height: 60.0,
+              child: new RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    side: BorderSide(color: Colors.white)),
+                //              splashColor: Color(0xFFBF7EBB),
+                color: Color(0xFF2E9AA6),
+                child: new Text(
+                  "SALIR",
+                  style: new TextStyle(fontSize: 20.0, color: Colors.white),
+                ),
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+              ),
+            ),
             new Expanded(
               child: Container(),
             ),
