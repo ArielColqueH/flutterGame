@@ -64,6 +64,7 @@ class _route extends State<thirdRoute> {
           //boton de pausar la partida, aqui se podran observar ciertas funciones
           new RawMaterialButton(
             onPressed: () {
+              //control de bandera para pausar el juego ya que todas las funciones son asincronas
               gameController.pausado = true;
 //              print('pause');
               showDialog(
@@ -98,6 +99,7 @@ class _route extends State<thirdRoute> {
                             ),
                             onPressed: () {
                               Navigator.pop(context);
+                              //control de bandera para despausar el juego
                               gameController.pausado = false;
                             },
                           ),

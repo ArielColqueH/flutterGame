@@ -78,7 +78,7 @@ class GameController extends Game {
     healhtBar.render(c);// renderizar barra de salud
     vidaText.render(c); // renderizar texto de vida
   }
-  //funcion de renderizacion
+  //funcion de actualizar los componentes actualizados a cada momento
   void update(double t) {
     if (pausado == false) {
       enemySpawner.update(t);

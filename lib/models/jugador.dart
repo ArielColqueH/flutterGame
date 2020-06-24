@@ -1,3 +1,4 @@
+//objeto para datos de jugador
 class Jugador{
   String _nombre;
   int _score;
