@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'game_controller.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
 class thirdRoute extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -16,14 +17,22 @@ class thirdRoute extends StatefulWidget {
 }
 
 class _route extends State<thirdRoute> {
-  int maxNiveles =3;
-  Timer _timer;
-  int segloop=20;
-  int _start = 20;
-  List<String> a = ["casa1", "casa2", "casa3", "casa4", "casa5"];
-  int indexImageVariable=0;
+  //variables iniciales para la pantalla de inicio de juego
+  int maxNiveles = 3; // niveles creados
+  Timer _timer; //objeto de tiempo para el timer
+  int segloop =
+      20; // segundo de duracion de cada nivel estatico para que vez que se reinicia el juego o tiene que hacer otro loop
+  int _start = 20; //segundos por default al iniciar cada nivel
+  List<String> a = [
+    "casa1",
+    "casa2",
+    "casa3",
+    "casa4",
+    "casa5"
+  ]; //lista de imagenes para el objeto central
   @override
   GameController gameController;
+
   void iniciar() async {
     WidgetsFlutterBinding.ensureInitialized();
     Util flameUtil = Util();
@@ -48,9 +57,11 @@ class _route extends State<thirdRoute> {
             child: new Image(
               width: 139,
               height: 139,
-              image: AssetImage('assets/images/'+a[gameController.indexImage]+".png"),
+              image: AssetImage(
+                  'assets/images/' + a[gameController.indexImage] + ".png"),
             ),
           ),
+          //boton de pausar la partida, aqui se podran observar ciertas funciones
           new RawMaterialButton(
             onPressed: () {
               gameController.pausado = true;
@@ -59,79 +70,80 @@ class _route extends State<thirdRoute> {
                 context: context,
                 builder: (context) {
                   return Theme(
-                      data: Theme.of(context)
-                          .copyWith(dialogBackgroundColor: Colors.black12),
-                      child: new AlertDialog(
-                        title: Center(
-                          child: Text(
-                            "Pausa",
-                            style: TextStyle(
-                              color: Colors.purpleAccent,
-                              fontSize: 50.0,
-                            ),
+                    data: Theme.of(context)
+                        .copyWith(dialogBackgroundColor: Colors.black12),
+                    child: new AlertDialog(
+                      title: Center(
+                        child: Text(
+                          "Pausa",
+                          style: TextStyle(
+                            color: Colors.purpleAccent,
+                            fontSize: 50.0,
                           ),
                         ),
-                        content: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            OutlineButton(
-                              //splashColor: Colors.lightBlue,
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(30.0)),
-                              color: Colors.transparent,
-                              child: new Text(
-                                "Continuar",
-                                style: new TextStyle(
-                                    fontSize: 30.0, color: Colors.purpleAccent),
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                gameController.pausado = false;
-                              },
+                      ),
+                      content: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          //botton continuar
+                          OutlineButton(
+                            //splashColor: Colors.lightBlue,
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0)),
+                            color: Colors.transparent,
+                            child: new Text(
+                              "Continuar",
+                              style: new TextStyle(
+                                  fontSize: 30.0, color: Colors.purpleAccent),
                             ),
-                            SizedBox(
-                              height: 25,
+                            onPressed: () {
+                              Navigator.pop(context);
+                              gameController.pausado = false;
+                            },
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          //botton reiniciar
+                          OutlineButton(
+                            splashColor: Colors.lightBlue,
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0)),
+                            color: Colors.transparent,
+                            child: new Text(
+                              "Reiniciar",
+                              style: new TextStyle(
+                                  fontSize: 30.0, color: Colors.purpleAccent),
                             ),
-                            OutlineButton(
-                              splashColor: Colors.lightBlue,
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(30.0)),
-                              color: Colors.transparent,
-                              child: new Text(
-                                "Reiniciar",
-                                style: new TextStyle(
-                                    fontSize: 30.0, color: Colors.purpleAccent),
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                gameController.restartGame();
-                                gameController.pausado = false;
-                                _start=segloop;
-                                startTimer();
-                              },
+                            onPressed: () {
+                              Navigator.pop(context);
+                              gameController.restartGame();
+                              gameController.pausado = false;
+                              _start = segloop;
+                              startTimer();
+                            },
+                          ),
+                          SizedBox(height: 25),
+                          //botton ir a menu principal
+                          OutlineButton(
+                            shape: new RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(30.0)),
+                            color: Colors.transparent,
+                            child: new Text(
+                              "Menu Principal",
+                              style: new TextStyle(
+                                  fontSize: 30.0, color: Colors.purpleAccent),
                             ),
-                            SizedBox(height: 25),
-                            OutlineButton(
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(30.0)),
-                              color: Colors.transparent,
-                              child: new Text(
-                                "Menu Principal",
-                                style: new TextStyle(
-                                    fontSize: 30.0, color: Colors.purpleAccent),
-                              ),
-                              onPressed: () {
-                                //gameController.pausado = false;
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ],
-                        ),
-                      ));
+                            onPressed: () {
+                              //gameController.pausado = false;
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 },
               );
             },
@@ -153,22 +165,22 @@ class _route extends State<thirdRoute> {
     iniciar();
   }
 
+  //funcion de tiempo
   void startTimer() {
-    print("start :"+_start.toString());
+    //print("start :"+_start.toString());
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
       oneSec,
-          (Timer timer) => setState(
-            () {
+      (Timer timer) => setState(
+        () {
           if (_start < 1) {
-              print("pasaron "+segloop.toString()+" segundos");
-              gameController.nivelJuego++;
-              if(gameController.nivelJuego==4){
-                timer.cancel();
-                //gameController.pausado = true;
-              }else{
-                _start=segloop;
-              }
+            print("pasaron " + segloop.toString() + " segundos");
+            gameController.nivelJuego++;
+            if (gameController.nivelJuego == 4) {
+              timer.cancel();
+            } else {
+              _start = segloop;
+            }
           } else {
             _start = _start - 1;
           }
@@ -177,9 +189,9 @@ class _route extends State<thirdRoute> {
     );
   }
 
+  //funcion de cancelar el timer cuando del juego acabe
   void dispose() {
     _timer.cancel();
     super.dispose();
   }
-
 }

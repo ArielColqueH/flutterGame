@@ -49,6 +49,7 @@ class _MyApp extends State<MyApp> {
             new Expanded(
               child: Container(),
             ),
+            //boton de jugar
             ButtonTheme(
               minWidth: 240.0,
               height: 60.0,
@@ -74,6 +75,7 @@ class _MyApp extends State<MyApp> {
               ),
             ),
             SizedBox(height: 30),
+            //boton de puntuaciones
             ButtonTheme(
               minWidth: 240.0,
               height: 60.0,
