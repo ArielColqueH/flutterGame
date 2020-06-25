@@ -32,7 +32,7 @@ class _route extends State<thirdRoute> {
   ]; //lista de imagenes para el objeto central
   @override
   GameController gameController;
-
+  //motor de flame inicializado
   void iniciar() async {
     WidgetsFlutterBinding.ensureInitialized();
     Util flameUtil = Util();
@@ -166,6 +166,7 @@ class _route extends State<thirdRoute> {
 
   void initState() {
     iniciar();
+    print("juego iniciado");
   }
 
   //funcion de tiempo

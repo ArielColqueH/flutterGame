@@ -16,11 +16,14 @@ class _MySecondRoute extends State<SecondRoute> {
 
   void initState() {
     super.initState();
+    //_puntuacionesBloc.cargar();
+    //print("imprimio");
   }
 
   void dispose() {
     super.dispose();
     _puntuacionesBloc.dispose();
+    print("salio");
   }
 
   @override
@@ -37,6 +40,7 @@ class _MySecondRoute extends State<SecondRoute> {
           "Top Puntuaciones",
           style: new TextStyle(fontSize: 20.0, color: Colors.white),
         ),
+
         SizedBox(height: 30),
         //EJEMPLO DE TABLA UTILIZANDO FIREBASE DIRECTAMENTE
         Expanded(
@@ -82,7 +86,7 @@ class _MySecondRoute extends State<SecondRoute> {
                     });
               }),
         ),
-//        EJEMPLO DE TABLA UTILIZANDO BLOCK
+        //EJEMPLO DE TABLA UTILIZANDO BLOCK
 //        Expanded(
 //          child: StreamBuilder<List<Jugador>>(
 //              stream: _puntuacionesBloc.jugadorListStream,

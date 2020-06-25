@@ -7,9 +7,6 @@ import 'package:flutterjuego/game_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterjuego/puntuaciones.dart';
 import 'package:flutterjuego/inicio.dart';
-
-//void main() => runApp(MyApp());
-
 void main() {
   runApp(
       MaterialApp(
@@ -64,13 +61,14 @@ class _MyApp extends State<MyApp> {
                   style: new TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
                 onPressed: (){
-//                  print('ir a juego');
-                  gameController.restartGame();
-                  gameController.pausado = false;
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => thirdRoute())
+                      context,
+                      MaterialPageRoute(builder: (context) => thirdRoute())
                   );
+                  gameController.restartGame();
+
+                  gameController.pausado = false;
+
                 },
               ),
             ),

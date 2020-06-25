@@ -41,6 +41,7 @@ class GameController extends Game {
   VidaText vidaText;
   bool juegoTerminado;
   int indexImage = 0;
+  Enemy enemy;
   GameController(context) {
     initialize();
     this.x = context;
@@ -64,6 +65,7 @@ class GameController extends Game {
     juegoTerminado = false;
     indexImage = 0;
     tilesSize=0;
+    enemy.health=3;
   }
 
   //renderdizar el main de videojuegos
@@ -181,6 +183,8 @@ class GameController extends Game {
     player.currentHealth = player.maxHealt;
     player.isDead = false;
     initialize();
+    GameController(x);
+
   }
 
   //widget de dialogo que se muestra al acabar el juego
