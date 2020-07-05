@@ -34,8 +34,9 @@ class Enemy{
             color = Color(0xFF999999);
             break;
           default:
-            color = Color(0xffffffff);
+            color = Color(0x00ffffff);
             break;
+            //asdfadgasdg
             //en cada nivel tendra un color principal ,del cual mientras uno
         // trate de eliminarlo ,el color se pondra mas claro dependiendo el toque en el que esta
         }
@@ -53,7 +54,7 @@ class Enemy{
             color = Color(0xFF666666);
             break;
           default:
-            color = Color(0xffffffff);
+            color = Color(0x00ffffff);
             break;
         }
         break;
@@ -75,7 +76,7 @@ class Enemy{
         }
         break;
       default:
-        color = Color(0xffffffff);
+        color = Color(0x00ffffff);
         break;
     }
     Paint enemyColor = Paint()..color = color;//obtener el color designado

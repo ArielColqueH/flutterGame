@@ -5,9 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class puntuacionesBloc {
   //lista de objetos para la table de ejemplo
 
-  final List <Jugador> _jugadorList = [
-    Jugador("ariel",11),
-  ];
+  final List <Jugador> _jugadorList = [];
 
   //DocumentSnapshot documentSnapshot =snapshots.data.documents[index];
   //stream Controller
